@@ -16,9 +16,11 @@
               <span class="icon icon--strips-small"></span>
             </div>
             <div class="small-card small-card--empty"></div>
-            <smallCard></smallCard>
-            <smallCard></smallCard>
-            <smallCard></smallCard>
+            <smallCard
+              v-bind:city="item"
+              v-for="(item, idx) in cities"
+              v-bind:key="idx"
+            ></smallCard>
           </div>
           <div class="weather-content__big-cards">
             <div class="weather-content__help">
@@ -68,6 +70,17 @@ export default {
     bigCard,
     mainMap,
     sortForm,
+  },
+  data() {
+    return {
+      cities: "",
+    };
+  },
+  mounted() {
+    let ths = this;
+    fetch("https://geo-weather-json.herokuapp.com/db/")
+      .then((responce) => responce.json())
+      .then((data) => (ths.cities = data.cities));
   },
 };
 </script>
