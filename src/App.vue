@@ -5,7 +5,7 @@
       <div class="weather-app__content weather-content">
         <section class="sort-form weather-content__sort">
           <h2 class="visually-hidden">Форма сортировки</h2>
-          <sortForm></sortForm>
+          <sortForm v-bind:cit="cities"></sortForm>
         </section>
         <section class="weather-content__result">
           <h2 class="visually-hidden">Результаты сортировки</h2>

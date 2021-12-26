@@ -1,6 +1,6 @@
 <template>
   <form action="#" method="GET">
-    <sortBtn></sortBtn>
+    <sortBtn v-bind:cities="cit"></sortBtn>
     <filterCity></filterCity>
     <filterweather></filterweather>
   </form>
@@ -17,6 +17,9 @@ export default {
     sortBtn,
     filterCity,
     filterweather,
+  },
+  props: {
+    cit: [Array, String],
   },
 };
 </script>

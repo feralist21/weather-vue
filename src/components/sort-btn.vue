@@ -6,7 +6,7 @@
         type="radio"
         name="alphabet-sort"
         value="alphabet-sort"
-        checked
+        v-on:click="sortAlphabet"
       />
       <label for="alphabet-sort" aria-label="Сортировка по алфавиту">
         <span class="icon icon--arrow-down"></span>
@@ -18,6 +18,7 @@
         type="radio"
         name="alphabet-sort"
         value="alphabet-sort-reverse"
+        v-on:click="sortAlphabetReverse"
       />
       <label
         for="alphabet-sort-reverse"
@@ -32,6 +33,17 @@
 <script>
 export default {
   name: "sort-btn",
+  props: {
+    cities: [String, Array],
+  },
+  methods: {
+    sortAlphabet() {
+      return this.cities.sort((a, b) => (a.city > b.city ? 1 : -1));
+    },
+    sortAlphabetReverse() {
+      return this.cities.sort((a, b) => (a.city < b.city ? 1 : -1));
+    },
+  },
 };
 </script>
 
