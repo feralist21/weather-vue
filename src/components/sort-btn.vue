@@ -7,6 +7,7 @@
         name="alphabet-sort"
         value="alphabet-sort"
         v-on:click="sortAlphabet"
+        v-model="sort"
       />
       <label for="alphabet-sort" aria-label="Сортировка по алфавиту">
         <span class="icon icon--arrow-down"></span>
@@ -19,6 +20,7 @@
         name="alphabet-sort"
         value="alphabet-sort-reverse"
         v-on:click="sortAlphabetReverse"
+        v-model="sort"
       />
       <label
         for="alphabet-sort-reverse"
@@ -35,6 +37,11 @@ export default {
   name: "sort-btn",
   props: {
     cities: [String, Array],
+  },
+  data() {
+    return {
+      sort: "alphabet-sort",
+    };
   },
   methods: {
     sortAlphabet() {

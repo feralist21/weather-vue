@@ -89,7 +89,10 @@ export default {
     let ths = this;
     fetch("https://geo-weather-json.herokuapp.com/db/")
       .then((responce) => responce.json())
-      .then((data) => (ths.cities = data.cities));
+      .then(function (data) {
+        let sortCities = data.cities.sort((a, b) => (a.city > b.city ? 1 : -1));
+        return (ths.cities = sortCities);
+      });
   },
   methods: {
     getFilter(item) {
