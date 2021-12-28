@@ -5,7 +5,11 @@
       <div class="weather-app__content weather-content">
         <section class="sort-form weather-content__sort">
           <h2 class="visually-hidden">Форма сортировки</h2>
-          <sortForm v-bind:cit="cities"></sortForm>
+          <form action="#" method="GET">
+            <sortBtn v-bind:cities="cities"></sortBtn>
+            <filterCity v-on:filtered="getFilter"></filterCity>
+            <filterweather></filterweather>
+          </form>
         </section>
         <section class="weather-content__result">
           <h2 class="visually-hidden">Результаты сортировки</h2>
@@ -18,7 +22,7 @@
             <div class="small-card small-card--empty"></div>
             <smallCard
               v-bind:city="item"
-              v-for="(item, idx) in cities"
+              v-for="(item, idx) in filteredCities"
               v-bind:key="idx"
             ></smallCard>
           </div>
@@ -61,7 +65,9 @@
 import smallCard from "./components/small-card";
 import bigCard from "./components/big-card";
 import mainMap from "./components/main-map";
-import sortForm from "./components/sort-form";
+import sortBtn from "./components/sort-btn";
+import filterCity from "./components/filter-city";
+import filterweather from "./components/filter-weather";
 
 export default {
   name: "App",
@@ -69,11 +75,14 @@ export default {
     smallCard,
     bigCard,
     mainMap,
-    sortForm,
+    sortBtn,
+    filterCity,
+    filterweather,
   },
   data() {
     return {
-      cities: "",
+      cities: [],
+      filter: "",
     };
   },
   mounted() {
@@ -81,6 +90,19 @@ export default {
     fetch("https://geo-weather-json.herokuapp.com/db/")
       .then((responce) => responce.json())
       .then((data) => (ths.cities = data.cities));
+  },
+  methods: {
+    getFilter(item) {
+      this.filter = item;
+    },
+  },
+  computed: {
+    filteredCities: function () {
+      let ths = this;
+      return this.cities.filter(function (el) {
+        return el.city.toLowerCase().indexOf(ths.filter.toLowerCase()) !== -1;
+      });
+    },
   },
 };
 </script>

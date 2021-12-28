@@ -6,6 +6,8 @@
         type="search"
         name="city-search"
         placeholder="Название города"
+        v-model="city"
+        v-on:input="findCity"
       />
       <label for="search" aria-label="Поиск городов"></label>
     </div>
@@ -15,6 +17,16 @@
 <script>
 export default {
   name: "filter-city",
+  data() {
+    return {
+      city: "",
+    };
+  },
+  methods: {
+    findCity() {
+      this.$emit("filtered", this.city);
+    },
+  },
 };
 </script>
 
