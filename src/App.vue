@@ -14,25 +14,37 @@
         <section class="weather-content__result">
           <h2 class="visually-hidden">Результаты сортировки</h2>
           <div class="weather-content__small-cards">
-            <div class="small-card small-card--shadow">
+            <!-- <div class="small-card small-card--shadow">
               <span class="small-card__city"> Чебоксары </span>
               <span class="small-card__temperature">+17°</span>
               <span class="icon icon--strips-small"></span>
             </div>
-            <div class="small-card small-card--empty"></div>
-            <smallCard
-              v-bind:city="item"
-              v-for="(item, idx) in filteredCities"
-              v-bind:key="idx"
-            ></smallCard>
+            <div class="small-card small-card--empty"></div> -->
+            <draggable v-bind:list="cities" group="cityList">
+              <smallCard
+                v-bind:smallCity="item"
+                v-for="(item, idx) in filteredCities"
+                v-bind:key="idx"
+              ></smallCard>
+            </draggable>
           </div>
           <div class="weather-content__big-cards">
             <div class="weather-content__help">
               Перетащите сюда города, погода в которых вам интересна
             </div>
-            <bigCard></bigCard>
-            <bigCard></bigCard>
-            <div class="big-card big-card--shadow">
+            <draggable
+              class="weather-content__draggable"
+              v-bind:list="favoriteCities"
+              group="cityList"
+            >
+              <bigCard
+                v-bind:fullInfo="item"
+                v-for="(item, i) in favoriteCities"
+                v-bind:key="i"
+              >
+              </bigCard>
+            </draggable>
+            <!-- <div class="big-card big-card--shadow">
               <div class="big-card__header">
                 <span class="icon icon--strips-big"></span>
                 <span class="big-card__city">Великий Новгород</span>
@@ -52,7 +64,7 @@
                 <span class="big-card__temperature">+12°</span>
               </div>
             </div>
-            <div class="big-card big-card--empty"></div>
+            <div class="big-card big-card--empty"></div> -->
           </div>
         </section>
       </div>
@@ -68,6 +80,7 @@ import mainMap from "./components/main-map";
 import sortBtn from "./components/sort-btn";
 import filterCity from "./components/filter-city";
 import filterweather from "./components/filter-weather";
+import draggable from "vuedraggable";
 
 export default {
   name: "App",
@@ -78,11 +91,13 @@ export default {
     sortBtn,
     filterCity,
     filterweather,
+    draggable,
   },
   data() {
     return {
       cities: [],
       filter: "",
+      favoriteCities: [],
     };
   },
   mounted() {

@@ -16,3 +16,8 @@
 @import url("./blocks/weather-content.css");
 @import url("./blocks/weather-map.css");
 @import url("./blocks/pin.css");
+
+.weather-content__draggable {
+  width: 100%;
+  height: 100%;
+}
