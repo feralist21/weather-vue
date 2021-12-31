@@ -46,13 +46,19 @@
           >
         </div>
       </div>
-      <span class="big-card__temperature" v-if="fullInfo.temperature > 0">
+      <!-- <span v-if="fullInfo.temperature < 0" class="big-card__temperature">
         +{{ fullInfo.temperature }}°</span
       >
-      <span class="big-card__temperature" v-else-if="city.temperature === 0">
+      <span v-else-if="city.temperature === 0" class="big-card__temperature">
         {{ fullInfo.temperature }}°</span
       >
-      <span class="big-card__temperature" v-else>
+      <span v-else class="big-card__temperature"
+        >{{ fullInfo.temperature }}°</span
+      > -->
+      <span v-if="fullInfo.temperature > 0" class="big-card__temperature">
+        +{{ fullInfo.temperature }}°</span
+      >
+      <span v-else class="big-card__temperature">
         {{ fullInfo.temperature }}°</span
       >
     </div>

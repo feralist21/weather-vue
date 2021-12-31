@@ -32,39 +32,20 @@
             <div class="weather-content__help">
               Перетащите сюда города, погода в которых вам интересна
             </div>
-            <draggable
-              class="weather-content__draggable"
-              v-bind:list="favoriteCities"
-              group="cityList"
-            >
-              <bigCard
-                v-bind:fullInfo="item"
-                v-for="(item, i) in favoriteCities"
-                v-bind:key="i"
+            <div class="weather-content__big-inner">
+              <draggable
+                class="weather-content__draggable"
+                v-bind:list="favoriteCities"
+                group="cityList"
               >
-              </bigCard>
-            </draggable>
-            <!-- <div class="big-card big-card--shadow">
-              <div class="big-card__header">
-                <span class="icon icon--strips-big"></span>
-                <span class="big-card__city">Великий Новгород</span>
-              </div>
-              <div class="big-card__content">
-                <div class="big-card__content-wrapper">
-                  <div class="big-card__weather-conditions">
-                    <span class="icon icon--rainy"></span>
-                    <span class="icon icon--meteor-shower"></span>
-                    <span class="icon icon--tornado"></span>
-                  </div>
-                  <div class="big-card__wind">
-                    <span class="icon icon--wind"></span>
-                    <span class="big-card__wind-info">Ветер ЮВ, 0-1 м/с</span>
-                  </div>
-                </div>
-                <span class="big-card__temperature">+12°</span>
-              </div>
+                <bigCard
+                  v-bind:fullInfo="item"
+                  v-for="(item, ix) in favoriteCities"
+                  v-bind:key="ix"
+                >
+                </bigCard>
+              </draggable>
             </div>
-            <div class="big-card big-card--empty"></div> -->
           </div>
         </section>
       </div>
