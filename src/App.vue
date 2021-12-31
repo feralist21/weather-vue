@@ -14,13 +14,7 @@
         <section class="weather-content__result">
           <h2 class="visually-hidden">Результаты сортировки</h2>
           <div class="weather-content__small-cards">
-            <!-- <div class="small-card small-card--shadow">
-              <span class="small-card__city"> Чебоксары </span>
-              <span class="small-card__temperature">+17°</span>
-              <span class="icon icon--strips-small"></span>
-            </div>
-            <div class="small-card small-card--empty"></div> -->
-            <draggable v-bind:list="cities" group="cityList">
+            <draggable v-bind:list="cities" :sort="false" group="cityList">
               <smallCard
                 v-bind:smallCity="item"
                 v-for="(item, idx) in filteredCities"
@@ -35,6 +29,7 @@
             <div class="weather-content__big-inner">
               <draggable
                 class="weather-content__draggable"
+                ghost-class="big-card--empty"
                 v-bind:list="favoriteCities"
                 group="cityList"
               >
