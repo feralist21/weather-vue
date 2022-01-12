@@ -8,7 +8,7 @@
           <form action="#" method="GET">
             <sortBtn v-bind:cities="cities"></sortBtn>
             <filterCity v-on:filtered="getFilter"></filterCity>
-            <filterweather></filterweather>
+            <filterweather v-on:check-weather="getDataWeather"></filterweather>
           </form>
         </section>
         <section class="weather-content__result">
@@ -74,6 +74,7 @@ export default {
       cities: [],
       filter: "",
       favoriteCities: [],
+      weather: [],
     };
   },
   mounted() {
@@ -88,6 +89,9 @@ export default {
   methods: {
     getFilter(item) {
       this.filter = item;
+    },
+    getDataWeather(item) {
+      this.weather = item;
     },
   },
   computed: {
