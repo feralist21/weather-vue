@@ -100,11 +100,16 @@ export default {
   data() {
     return {
       weather: [],
+      filteredWeather: {},
     };
   },
   methods: {
     getWeather() {
-      this.$emit("check-weather", this.weather);
+      this.filteredWeather = {};
+      this.weather.forEach((element) => {
+        this.filteredWeather[element] = true;
+      });
+      this.$emit("check-weather", this.filteredWeather);
     },
   },
 };

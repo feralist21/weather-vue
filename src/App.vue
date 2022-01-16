@@ -35,7 +35,7 @@
               >
                 <bigCard
                   v-bind:fullInfo="item"
-                  v-for="(item, ix) in favoriteCities"
+                  v-for="(item, ix) in filteredFavoriteCities"
                   v-bind:key="ix"
                 >
                 </bigCard>
@@ -74,7 +74,7 @@ export default {
       cities: [],
       filter: "",
       favoriteCities: [],
-      weather: [],
+      weather: {},
     };
   },
   mounted() {
@@ -99,6 +99,14 @@ export default {
       let ths = this;
       return this.cities.filter(function (el) {
         return el.city.toLowerCase().indexOf(ths.filter.toLowerCase()) !== -1;
+      });
+    },
+    filteredFavoriteCities: function () {
+      let ths = this;
+      return this.favoriteCities.filter(function (city) {
+        return Object.keys(ths.weather).every(function (key) {
+          return city.weather[key] === ths.weather[key];
+        });
       });
     },
   },
