@@ -44,7 +44,7 @@
           </div>
         </section>
       </div>
-      <mainMap></mainMap>
+      <mainMap v-bind:favorCity="favoriteCities"></mainMap>
     </section>
   </main>
 </template>
@@ -78,12 +78,11 @@ export default {
     };
   },
   mounted() {
-    let ths = this;
     fetch("https://geo-weather-json.herokuapp.com/db/")
       .then((responce) => responce.json())
-      .then(function (data) {
+      .then((data) => {
         let sortCities = data.cities.sort((a, b) => (a.city > b.city ? 1 : -1));
-        return (ths.cities = sortCities);
+        return (this.cities = sortCities);
       });
   },
   methods: {
@@ -95,17 +94,15 @@ export default {
     },
   },
   computed: {
-    filteredCities: function () {
-      let ths = this;
-      return this.cities.filter(function (el) {
-        return el.city.toLowerCase().indexOf(ths.filter.toLowerCase()) !== -1;
+    filteredCities() {
+      return this.cities.filter((el) => {
+        return el.city.toLowerCase().indexOf(this.filter.toLowerCase()) !== -1;
       });
     },
-    filteredFavoriteCities: function () {
-      let ths = this;
-      return this.favoriteCities.filter(function (city) {
-        return Object.keys(ths.weather).every(function (key) {
-          return city.weather[key] === ths.weather[key];
+    filteredFavoriteCities() {
+      return this.favoriteCities.filter((city) => {
+        return Object.keys(this.weather).every((key) => {
+          return city.weather[key] === this.weather[key];
         });
       });
     },
